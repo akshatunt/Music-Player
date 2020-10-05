@@ -1,16 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
 from pygame import mixer
-import pyttsx3
-
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty('voices')
-
-engine.setProperty('voice', voices[0].id)
-
-def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
 
 class MusicPlayer:
 	def __init__(self, window ):
@@ -23,17 +13,14 @@ class MusicPlayer:
 		self.music_file = False
 		self.playing_state = False
 	def load(self):
-		speak("please select a music to play")
 		self.music_file = filedialog.askopenfilename()
 
 	def play(self):
-		speak("playing")
 		if self.music_file:
 			mixer.init()
 			mixer.music.load(self.music_file)
 			mixer.music.play()
 	def pause(self):
-		speak("pausing")
 		if not self.playing_state:
 			mixer.music.pause()
 			self.playing_state=True
@@ -41,7 +28,6 @@ class MusicPlayer:
 			mixer.music.unpause()
 			self.playing_state=False
 	def stop(self):
-		speak("see you next time")
 		mixer.music.stop()
 
 root=Tk()
